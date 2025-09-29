@@ -1,0 +1,14 @@
+{
+  "name": "mwanainchi-credit",
+  "version": "1.0.0",
+  "description": "Mwanainchi Credit Loan Application",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
