@@ -23,10 +23,10 @@ module.exports = async (req, res) => {
     }
 
     // Your M-Pesa credentials (set in Vercel environment variables)
-    const consumerKey = process.env.MPESA_CONSUMER_KEY;
-    const consumerSecret = process.env.MPESA_CONSUMER_SECRET;
-    const businessShortCode = process.env.MPESA_BUSINESS_SHORTCODE;
-    const passkey = process.env.MPESA_PASSKEY;
+    const consumerKey = UctWTuB0hS3g90B0ptC5TljFHYkIzerbeSgElkMnRA7TJG69N3YWhUob1ZgmxEBK;
+    const consumerSecret = UctWTuB0hS3g90B0ptC5TljFHYkIzerbeSgElkMnRA7TJG69N3YWhUob1ZgmxEBK;
+    const businessShortCode = process.env.9824375;
+    const passkey = process.env.bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919;
     
     // Get access token
     const authResponse = await axios.get(
@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
         PartyA: phoneNumber,
         PartyB: businessShortCode,
         PhoneNumber: phoneNumber,
-        CallBackURL: `${process.env.VERCEL_URL}/api/callback`,
+        CallBackURL: `${process.env.VERCEL_https://mydomain.com/mpesa-express-simulate/}/api/callback`,
         AccountReference: 'Mwanainchi Credit',
         TransactionDesc: 'Loan Service Fee'
       },
